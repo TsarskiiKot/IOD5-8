@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторні роботи - Аналіз продуктивності системи</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .device-input {
+            max-width: 100px;
+        }
+        .results-section {
+            display: none;
+        }
+        .tab-content {
+            padding-top: 20px;
+        }
+        .formula-block {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .formula {
+            font-family: "Times New Roman", Times, serif;
+            margin: 10px 0;
+            padding: 5px;
+        }
+        .formula-label {
+            font-weight: bold;
+            color: #0d6efd;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="mb-4">Аналіз продуктивності системи</h1>
+        
+        <!-- Tabs -->
+        <ul class="nav nav-tabs" id="labTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="lab5-tab" data-bs-toggle="tab" data-bs-target="#lab5" type="button" role="tab" aria-controls="lab5" aria-selected="true">Лабораторна робота №5-6</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lab7-tab" data-bs-toggle="tab" data-bs-target="#lab7" type="button" role="tab" aria-controls="lab7" aria-selected="false">Лабораторна робота №7</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lab8-tab" data-bs-toggle="tab" data-bs-target="#lab8" type="button" role="tab" aria-controls="lab8" aria-selected="false">Лабораторна робота №8</button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="labTabsContent">
+            <!-- Lab 5-6 Tab -->
+            <div class="tab-pane fade show active" id="lab5" role="tabpanel" aria-labelledby="lab5-tab">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Введіть значення продуктивності пристроїв</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="performanceForm">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <h6>Підсистема 1 (Функціональні пристрої 1-5)</h6>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₁</span>
+                                        <input type="number" class="form-control device-input" value="8" required>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₂</span>
+                                        <input type="number" class="form-control device-input" value="4" required>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₃</span>
+                                        <input type="number" class="form-control device-input" value="8" required>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₄</span>
+                                        <input type="number" class="form-control device-input" value="7" required>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₅</span>
+                                        <input type="number" class="form-control device-input" value="6" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <h6>Підсистема 2 (Функціональні пристрої 6-9)</h6>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₆</span>
+                                        <input type="number" class="form-control device-input" value="9" required>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₇</span>
+                                        <input type="number" class="form-control device-input" value="12" required>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₈</span>
+                                        <input type="number" class="form-control device-input" value="9" required>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₉</span>
+                                        <input type="number" class="form-control device-input" value="15" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <h6>Підсистема 3 (Функціональні пристрої 10-13)</h6>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₁₀</span>
+                                        <input type="number" class="form-control device-input" value="4" required>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₁₁</span>
+                                        <input type="number" class="form-control device-input" value="8" required>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₁₂</span>
+                                        <input type="number" class="form-control device-input" value="10" required>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₁₃</span>
+                                        <input type="number" class="form-control device-input" value="8" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary mt-3">Обчислити</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="results" class="results-section">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Формули розрахунку</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="formula-block">
+                                <div class="formula-label">Завантаженість пристрою:</div>
+                                <div class="formula">pᵢ = πᵣ / πᵢ, де πᵣ = min(πᵢ) у підсистемі</div>
+                                
+                                <div class="formula-label">Реальна продуктивність підсистеми:</div>
+                                <div class="formula">rᵢ = πᵣ × lᵢ, де lᵢ - кількість пристроїв у підсистемі i</div>
+                                
+                                <div class="formula-label">Загальна продуктивність системи:</div>
+                                <div class="formula">r = r₁ + r₂ + r₃</div>
+                                
+                                <div class="formula-label">Несумісність системи:</div>
+                                <div class="formula">Δ = π - r, де π - загальна пікова продуктивність</div>
+                                
+                                <div class="formula-label">Завантаженість системи:</div>
+                                <div class="formula">ρ = r / π</div>
+                                
+                                <div class="formula-label">Прискорення системи:</div>
+                                <div class="formula">S = r / max(πᵢ)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Результати</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Завантаженість пристроїв</h6>
+                                    <div id="deviceLoads" class="mb-3"></div>
+                                    
+                                    <h6>Реальна продуктивність підсистем</h6>
+                                    <div id="subsystemPerformances" class="mb-3"></div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <h6>Метрики системи</h6>
+                                    <div id="systemMetrics" class="mb-3"></div>
+                                    
+                                    <h6>Рекомендації</h6>
+                                    <div id="recommendations" class="mb-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab 7 Tab -->
+            <div class="tab-pane fade" id="lab7" role="tabpanel" aria-labelledby="lab7-tab">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Розрахунок прискорення та ефективності системи (Закон Амдала)</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="amdahlForm">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="totalOperations" class="form-label">Загальна кількість операцій (N)</label>
+                                        <input type="number" class="form-control" id="totalOperations" required min="1">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="sequentialOperations" class="form-label">Кількість послідовних операцій (n)</label>
+                                        <input type="number" class="form-control" id="sequentialOperations" required min="1">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="processors" class="form-label">Кількість процесорів (s)</label>
+                                        <input type="number" class="form-control" id="processors" required min="1">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Обчислити</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="amdahlResults" class="results-section">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Формули розрахунку</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="formula-block">
+                                <div class="formula-label">Частка послідовних обчислень:</div>
+                                <div class="formula">β = n / N</div>
+                                
+                                <div class="formula-label">Прискорення системи (Закон Амдала):</div>
+                                <div class="formula">Rₛ = s / (s × β + (1 - β))</div>
+                                
+                                <div class="formula-label">Ефективність системи:</div>
+                                <div class="formula">Eₛ = Rₛ / s</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Результати</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Метрики системи</h6>
+                                    <div id="amdahlMetrics" class="mb-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab 8 Tab -->
+            <div class="tab-pane fade" id="lab8" role="tabpanel" aria-labelledby="lab8-tab">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Розрахунок прискорення системи (Закони Амдала)</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="amdahlLab8Form">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="parallelFraction" class="form-label">Частка паралельних обчислень (1 - β)</label>
+                                        <input type="number" class="form-control" id="parallelFraction" value="0.65" step="0.01" min="0" max="1" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="processorsLab8" class="form-label">Кількість процесорів (l)</label>
+                                        <input type="number" class="form-control" id="processorsLab8" value="8" min="1" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="thresholdPercent" class="form-label">Поріг прискорення (відсоток)</label>
+                                        <input type="number" class="form-control" id="thresholdPercent" value="70" min="0" max="100" required>
+                                        <small class="form-text text-muted">Введіть значення від 70 до 85</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Обчислити</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="amdahlLab8Results" class="results-section">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Формули розрахунку</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="formula-block">
+                                <div class="formula-label">Частка послідовних обчислень:</div>
+                                <div class="formula">β = 1 - parallel_fraction</div>
+                                
+                                <div class="formula-label">Максимальне прискорення (Закон Амдала):</div>
+                                <div class="formula">S_max = l / (β × l + (1 - β))</div>
+                                
+                                <div class="formula-label">Умова порогу (Закон Амдала):</div>
+                                <div class="formula">S_l ≥ α × S_max, де α - поріг прискорення</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Результати</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Метрики системи</h6>
+                                    <div id="amdahlLab8Metrics" class="mb-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Lab 5-6 Form Handler
+        document.getElementById('performanceForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const inputs = document.querySelectorAll('#lab5 input[type="number"]');
+            const performances = Array.from(inputs).map(input => input.value);
+            
+            try {
+                const response = await fetch('/calculate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ performances }),
+                });
+                
+                const results = await response.json();
+                
+                // Display device loads
+                const deviceLoadsHtml = results.device_loads.map(load => 
+                    `<div>Функціональний пристрій ${load.device}: ${load.load}</div>`
+                ).join('');
+                document.getElementById('deviceLoads').innerHTML = deviceLoadsHtml;
+                
+                // Display subsystem performances
+                const subsystemPerformancesHtml = Object.entries(results.subsystem_performances)
+                    .map(([name, perf]) => `<div>${name}: ${perf}</div>`)
+                    .join('');
+                document.getElementById('subsystemPerformances').innerHTML = subsystemPerformancesHtml;
+                
+                // Display system metrics
+                const systemMetricsHtml = `
+                    <div>Загальна реальна продуктивність системи: ${results.total_real_performance}</div>
+                    <div>Загальна пікова продуктивність системи: ${results.total_peak_performance}</div>
+                    <div>Несумісність системи: ${results.incompatibility}</div>
+                    <div>Завантаженість системи: ${results.system_load}</div>
+                    <div>Прискорення системи: ${results.system_acceleration}</div>
+                `;
+                document.getElementById('systemMetrics').innerHTML = systemMetricsHtml;
+                
+                // Display recommendations
+                const recommendationsHtml = results.recommendations
+                    .map(rec => `<div class="text-muted">${rec}</div>`)
+                    .join('');
+                document.getElementById('recommendations').innerHTML = recommendationsHtml;
+                
+                // Show results section
+                document.getElementById('results').style.display = 'block';
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Сталася помилка під час обчислення результатів.');
+            }
+        });
+
+        // Lab 7 Form Handler
+        document.getElementById('amdahlForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const N = document.getElementById('totalOperations').value;
+            const n = document.getElementById('sequentialOperations').value;
+            const s = document.getElementById('processors').value;
+            
+            try {
+                const response = await fetch('/calculate_amdahl', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ N, n, s }),
+                });
+                
+                const results = await response.json();
+                
+                // Display Amdahl metrics
+                const amdahlMetricsHtml = `
+                    <div>Частка послідовних обчислень (β): ${results.beta}</div>
+                    <div>Прискорення системи (Rₛ): ${results.acceleration}</div>
+                    <div>Ефективність системи (Eₛ): ${results.efficiency}</div>
+                `;
+                document.getElementById('amdahlMetrics').innerHTML = amdahlMetricsHtml;
+                
+                // Show results section
+                document.getElementById('amdahlResults').style.display = 'block';
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Сталася помилка під час обчислення результатів.');
+            }
+        });
+
+        // Lab 8 Form Handler
+        document.getElementById('amdahlLab8Form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const parallelFraction = document.getElementById('parallelFraction').value;
+            const processors = document.getElementById('processorsLab8').value;
+            const thresholdPercent = document.getElementById('thresholdPercent').value;
+            
+            try {
+                const response = await fetch('/calculate_amdahl_lab8', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        parallel_fraction: parallelFraction,
+                        processors: processors,
+                        threshold_percent: thresholdPercent
+                    }),
+                });
+                
+                const results = await response.json();
+                
+                // Display Amdahl Lab 8 metrics
+                const amdahlLab8MetricsHtml = `
+                    <div>Частка послідовних обчислень (β): ${results.beta}</div>
+                    <div>Максимальне прискорення (S): ${results.max_acceleration}</div>
+                    <div>Мінімальна кількість процесорів для досягнення ${thresholdPercent}%: ${results.min_processors}</div>
+                `;
+                document.getElementById('amdahlLab8Metrics').innerHTML = amdahlLab8MetricsHtml;
+                
+                // Show results section
+                document.getElementById('amdahlLab8Results').style.display = 'block';
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Сталася помилка під час обчислення результатів.');
+            }
+        });
+    </script>
+</body>
+</html> 
