@@ -62,7 +62,11 @@
                         <form id="performanceForm">
                             <div class="row g-3">
                                 <div class="col-md-4">
-                                    <h6>Підсистема 1 (Функціональні пристрої 1-5)</h6>
+                                    <h6>Підсистема 1 (Функціональні пристрої π₀ – π₅)</h6>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₀</span>
+                                        <input type="number" class="form-control device-input" value="8" required>
+                                    </div>
                                     <div class="input-group mb-2">
                                         <span class="input-group-text">π₁</span>
                                         <input type="number" class="form-control device-input" value="8" required>
@@ -86,7 +90,7 @@
                                 </div>
                                 
                                 <div class="col-md-4">
-                                    <h6>Підсистема 2 (Функціональні пристрої 6-9)</h6>
+                                    <h6>Підсистема 2 (Функціональні пристрої π₆ – π₉)</h6>
                                     <div class="input-group mb-2">
                                         <span class="input-group-text">π₆</span>
                                         <input type="number" class="form-control device-input" value="9" required>
@@ -106,7 +110,7 @@
                                 </div>
                                 
                                 <div class="col-md-4">
-                                    <h6>Підсистема 3 (Функціональні пристрої 10-13)</h6>
+                                    <h6>Підсистема 3 (Функціональні пристрої π₁₀ – π₁₄)</h6>
                                     <div class="input-group mb-2">
                                         <span class="input-group-text">π₁₀</span>
                                         <input type="number" class="form-control device-input" value="4" required>
@@ -121,6 +125,10 @@
                                     </div>
                                     <div class="input-group mb-2">
                                         <span class="input-group-text">π₁₃</span>
+                                        <input type="number" class="form-control device-input" value="8" required>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text">π₁₄</span>
                                         <input type="number" class="form-control device-input" value="8" required>
                                     </div>
                                 </div>
@@ -346,19 +354,39 @@
                 const results = await response.json();
                 
                 // Display device loads
-                const deviceLoadsHtml = results.device_loads.map(load => 
-                    `<div>Функціональний пристрій ${load.device}: ${load.load}</div>`
-                ).join('');
+                const deviceLoadsHtml = `
+                    <div class="formula-block mb-3">
+                        <div class="formula-label">Формула:</div>
+                        <div class="formula">${results.formulas.device_load}</div>
+                    </div>
+                    ${results.device_loads.map(load => 
+                        `<div>Пристрій π${load.device}: ${load.load}</div>`
+                    ).join('')}
+                `;
                 document.getElementById('deviceLoads').innerHTML = deviceLoadsHtml;
                 
                 // Display subsystem performances
-                const subsystemPerformancesHtml = Object.entries(results.subsystem_performances)
-                    .map(([name, perf]) => `<div>${name}: ${perf}</div>`)
-                    .join('');
+                const subsystemPerformancesHtml = `
+                    <div class="formula-block mb-3">
+                        <div class="formula-label">Формула:</div>
+                        <div class="formula">${results.formulas.subsystem_performance}</div>
+                    </div>
+                    ${Object.entries(results.subsystem_performances)
+                        .map(([name, perf]) => `<div>${name}: ${perf}</div>`)
+                        .join('')}
+                `;
                 document.getElementById('subsystemPerformances').innerHTML = subsystemPerformancesHtml;
                 
                 // Display system metrics
                 const systemMetricsHtml = `
+                    <div class="formula-block mb-3">
+                        <div class="formula-label">Формули:</div>
+                        <div class="formula">${results.formulas.total_real_performance}</div>
+                        <div class="formula">${results.formulas.peak_performance}</div>
+                        <div class="formula">${results.formulas.incompatibility}</div>
+                        <div class="formula">${results.formulas.system_load}</div>
+                        <div class="formula">${results.formulas.system_acceleration}</div>
+                    </div>
                     <div>Загальна реальна продуктивність системи: ${results.total_real_performance}</div>
                     <div>Загальна пікова продуктивність системи: ${results.total_peak_performance}</div>
                     <div>Несумісність системи: ${results.incompatibility}</div>
@@ -369,7 +397,7 @@
                 
                 // Display recommendations
                 const recommendationsHtml = results.recommendations
-                    .map(rec => `<div class="text-muted">${rec}</div>`)
+                    .map(rec => `<div class="text-muted mb-2">${rec}</div>`)
                     .join('');
                 document.getElementById('recommendations').innerHTML = recommendationsHtml;
                 
@@ -402,6 +430,12 @@
                 
                 // Display Amdahl metrics
                 const amdahlMetricsHtml = `
+                    <div class="formula-block mb-3">
+                        <div class="formula-label">Формули:</div>
+                        <div class="formula">${results.formulas.beta}</div>
+                        <div class="formula">${results.formulas.acceleration}</div>
+                        <div class="formula">${results.formulas.efficiency}</div>
+                    </div>
                     <div>Частка послідовних обчислень (β): ${results.beta}</div>
                     <div>Прискорення системи (Rₛ): ${results.acceleration}</div>
                     <div>Ефективність системи (Eₛ): ${results.efficiency}</div>
@@ -441,6 +475,12 @@
                 
                 // Display Amdahl Lab 8 metrics
                 const amdahlLab8MetricsHtml = `
+                    <div class="formula-block mb-3">
+                        <div class="formula-label">Формули:</div>
+                        <div class="formula">${results.formulas.beta}</div>
+                        <div class="formula">${results.formulas.max_acceleration}</div>
+                        <div class="formula">${results.formulas.min_processors}</div>
+                    </div>
                     <div>Частка послідовних обчислень (β): ${results.beta}</div>
                     <div>Максимальне прискорення (S): ${results.max_acceleration}</div>
                     <div>Мінімальна кількість процесорів для досягнення ${thresholdPercent}%: ${results.min_processors}</div>
